@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax and Json</title>
+    <style>
+        *{
+			margin: 0px;
+			padding: 0px;
+			user-select: none;
+			font-size:20;
+			text-align: center;
+			color: white;
+			text-decoration: none;
+
+		}
+
+
+
+		body{
+			min-width:1000px;
+			min-height:650px;
+			background: #f1f1f1;
+			transition: 0.5s;
+		}
+
+
+
+		#btnshow{
+        margin-top: 50px;
+		    border: 0;
+		    background: #4885ef;
+        box-shadow: 7px 7px 20px #afafaf,
+                -7px -7px 20px #ffffff;
+		    color: #ffffff;
+		    padding: 15px;
+		    border-radius: 15px;
+        animation-fill-mode: forwards;
+		}
+    #btnshow:active{
+      background: #2865cf;
+		}
+    #btnshow:focus{
+      outline: none;
+		}
+
+    #innerbody{
+			padding: 15px;
+			margin: 0px;
+			background: transparent;
+
+			background: #f1f1f1;
+			position: absolute;
+			top: 40%;
+			border-radius: 15px;
+			box-shadow: 7px 7px 20px #afafaf,
+              -7px -7px 20px #ffffff;
+			left: 50%;
+			transform: translateY(-50%);
+			transform: translateX(-50%);
+		}
+
+		#innerbody span{
+			width; 100px;
+			margin: 10px;
+      color: #7a7a7a;
+			padding-right: 50px;
+			padding-left: 50px;
+      text-align: center;
+      justify-content: center;
+			border-radius: 15px;
+      text-transform: capitalize;
+		}
+
+    #innerbody span p {
+      color: #7a7a7a;
+      padding: 5px;
+    }
+
+
+
+    #errorshow{
+			padding: 15px;
+			margin: 0px;
+			background: transparent;
+			background: #ff0000 ;
+			position: absolute;
+			top: 25%;
+			border-radius: 15px;
+			box-shadow: 7px 7px 20px #afafaf,
+              -7px -7px 20px #ffffff;
+			left: 50%;
+			transform: translateY(-50%);
+			transform: translateX(-50%);
+      visibility: hidden;
+		}
+
+		#errorshow span{
+			margin: 10px;
+      width: 0px;
+      color: #ffffff;
+      text-align: center;
+      justify-content: center;
+			border-radius: 15px;
+      text-transform: capitalize;
+		}
+
+    </style>
+</head>
+<body>
+
+                <input type="button" value="Import Data" id="btnshow">
+                <span id="innerbody">
+                  <span id="insertcontent">
+                      Data will Will appear here
+                  </span>
+                </span>
+
+                <span id="errorshow">
+                    <span id="errorcontent">
+                        There is no more data to show
+                    </span>
+                </span>
+		<script>
+        var datameet = "";
+        var pos = -1;
+        var insertintocontent = "";
+        var insertcontent = document.getElementById("insertcontent");
+        var btn = document.getElementById("btnshow");
+
+        function datainsert(datameet){
+            console.log(pos+ " " +datameet.length);
+            pos++;
+            if(pos < datameet.length )
+            {
+              insertintocontent ="<p>" + "Id : " + (pos+1) +
+               "</p><p>User : " + datameet[pos].name +
+              "</p><p>" + "Gender : " + datameet[pos].sex +
+              "</p><p>" + "Mobile : " + datameet[pos].mobile +
+              "</p><p>" + "Location : " + datameet[pos].location ;
+              insertcontent.innerHTML  = insertintocontent;
+
+            }
+            else
+            {
+                document.getElementById("errorshow").style.visibility="visible";
+                document.getElementById("btnshow").style.background="#5f5f5f";
+            }
+
+        }
+
+        function importdata() {
+          var getmethanos = new XMLHttpRequest();
+          getmethanos.open('GET', "https://raw.githubusercontent.com/sahilbhatiya/college/master/sahildata.json");
+          getmethanos.onload = function(){
+            datameet =  JSON.parse(getmethanos.responseText);
+            datainsert(datameet);
+          };
+          getmethanos.send();
+        }
+
+
+        btn.addEventListener("click",importdata);
+		</script>
+</body>
+</html>
