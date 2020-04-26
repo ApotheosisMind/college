@@ -24,15 +24,15 @@
     "location":"India"
   },
   {
-    "name":"Arti Bhatiya",
-    "sex": "Female",
-    "mobile":"+917575015525",
-    "location":"India"
-  },
-  {
     "name":"Jainam Bhatiya",
     "sex": "Male",
     "mobile":"+91971486589",
+    "location":"India"
+  },
+    {
+    "name":"Nilesh Parmar",
+    "sex": "Male",
+    "mobile":"+919724346729",
     "location":"India"
   }
 ]
